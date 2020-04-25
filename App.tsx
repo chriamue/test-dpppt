@@ -1,21 +1,30 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, Alert } from 'react-native';
 
-import Dpppt from 'react-native-dpppt';
+import * as Dp3t from 'react-native-dp3t';
+
 
 export default function App() {
-  Dpppt.init('APP_ID', true);
-  Dpppt.requestIgnoreBatteryOptimizations();
-  Dpppt.requestLocationAccess();
-  Dpppt.start();
-  Dpppt.status().then((status: any) => console.log(status))
+  Dp3t.initWithDiscovery('appid', true).then(() => Dp3t.start());
   return (
     <View style={styles.container}>
       <Text>Open up App.tsx to start working on your app!</Text>
-      <Button onPress={() => Dpppt.requestIgnoreBatteryOptimizations()} title='battery' />
-      <Button onPress={() => Dpppt.status().then((status: any) => console.log(status))} title='status' />
+      <Button onPress={() => {
+        Dp3t.requestPermissions();
+      }} title='battery' />
+      <Button onPress={async () => {
+        const status = await Dp3t.currentTracingStatus().catch((error: any) => console.log(error));
 
-      <Button onPress={() => Dpppt.start()} title='start' />
+        Alert.alert(
+          "DP3-T status",
+          JSON.stringify(status),
+          [
+            { text: "OK", onPress: () => console.log("OK Pressed") }
+          ],
+          { cancelable: false }
+        );
+      }} title='status' />
+      <Button onPress={() => {}} title='start' />
     </View>
   );
 }
