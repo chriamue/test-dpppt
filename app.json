@@ -1,0 +1,17 @@
+{
+  "name": "test-dpppt",
+  "displayName": "test-dpppt",
+  "expo": {
+    "name": "test-dpppt",
+    "slug": "test-dpppt",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
